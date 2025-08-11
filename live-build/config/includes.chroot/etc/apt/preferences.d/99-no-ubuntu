@@ -1,0 +1,15 @@
+Package: ubuntu-keyring
+Pin: release *
+Pin-Priority: -1
+
+Package: software-properties-common
+Pin: release *
+Pin-Priority: -1
+
+Package: software-properties-gtk
+Pin: release *
+Pin-Priority: -1
+
+Package: ubuntu-drivers-common
+Pin: release *
+Pin-Priority: -1

@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+printf "Welcome to Alpha OS (Debian bookworm live)\n" >/etc/motd
+printf "Alpha OS - Debian-based live system\n" >/etc/issue
+
+# LightDM greeter background if wallpaper exists
+if [ -f /usr/share/backgrounds/alpha-os-wallpaper.png ]; then
+  mkdir -p /etc/lightdm
+  if [ -f /etc/lightdm/lightdm-gtk-greeter.conf ]; then
+    if grep -q '^background=' /etc/lightdm/lightdm-gtk-greeter.conf; then
+      sed -i 's#^background=.*#background=/usr/share/backgrounds/alpha-os-wallpaper.png#' /etc/lightdm/lightdm-gtk-greeter.conf || true
+    else
+      printf "\n[greeter]\nbackground=/usr/share/backgrounds/alpha-os-wallpaper.png\n" >>/etc/lightdm/lightdm-gtk-greeter.conf
+    fi
+  else
+    printf "[greeter]\nbackground=/usr/share/backgrounds/alpha-os-wallpaper.png\n" >/etc/lightdm/lightdm-gtk-greeter.conf
+  fi
+fi

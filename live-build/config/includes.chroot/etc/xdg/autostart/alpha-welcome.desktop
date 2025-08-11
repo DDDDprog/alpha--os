@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Alpha Welcome
+Comment=Welcome to Alpha OS
+Exec=/usr/local/bin/alpha-welcome --autostart
+Terminal=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

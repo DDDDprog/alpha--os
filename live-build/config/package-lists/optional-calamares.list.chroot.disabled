@@ -1,0 +1,8 @@
+# Optional: Calamares graphical installer (DISABLED by default)
+# To enable, rename this file to optional-calamares.list.chroot
+# Note: Availability in Debian bookworm may vary; you may need backports or your own repo.
+calamares
+calamares-settings-debian
+kpmcore
+partitionmanager
+squashfs-tools

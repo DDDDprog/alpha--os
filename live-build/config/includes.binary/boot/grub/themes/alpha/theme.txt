@@ -1,0 +1,9 @@
+# Simple GRUB theme for Alpha OS
++ theme: "Alpha OS Theme"
++ title-text: "Alpha OS"
++ title-font: "Unifont Regular 16"
+desktop-image: "background.png"
+title-color: "255,255,255"
+message-color: "200,200,200"
+highlight-color: "255,255,255"
+terminal-box: "transparent"

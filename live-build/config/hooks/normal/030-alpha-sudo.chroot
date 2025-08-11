@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+echo "alpha ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/99-alpha
+chmod 0440 /etc/sudoers.d/99-alpha

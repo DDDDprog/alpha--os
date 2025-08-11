@@ -1,0 +1,64 @@
+# Alpha OS base packages (live system)
+
+# Core/CLI
+systemd-sysv
+sudo
+bash-completion
+ca-certificates
+curl
+wget
+vim
+git
+htop
+tmux
+less
+file
+nano
+net-tools
+iproute2
+debian-archive-keyring
+
+# Live boot + config
+live-boot
+live-config
+live-config-systemd
+
+# X stack + XFCE (explicit, avoid meta task)
+xserver-xorg
+xinit
+xfce4
+xfce4-goodies
+lightdm
+lightdm-gtk-greeter
+policykit-1
+accountsservice
+xfce4-terminal
+thunar-archive-plugin
+file-roller
+p7zip-full
+
+# Network
+network-manager
+network-manager-gnome
+
+# Browser
+firefox-esr
+
+# Firmware (broad coverage)
+firmware-linux-free
+firmware-misc-nonfree
+firmware-realtek
+firmware-iwlwifi
+firmware-amd-graphics
+firmware-atheros
+
+# Audio/Video and tools
+pulseaudio
+pavucontrol
+alsa-utils
+vlc
+
+# GUI helpers
+zenity
+gnome-disk-utility
+gparted

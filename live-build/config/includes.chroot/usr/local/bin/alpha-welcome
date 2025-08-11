@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HAS_ZENITY=0
+command -v zenity >/dev/null 2>&1 && HAS_ZENITY=1
+
+installer_available() {
+  command -v calamares >/dev/null 2>&1
+}
+
+do_install() {
+  if installer_available; then
+    sudo -n calamares || gksudo calamares || pkexec calamares || calamares
+  else
+    if [[ $HAS_ZENITY -eq 1 ]]; then
+      zenity --warning --width=420 --title="Alpha OS" --text="Calamares installer is not included by default.\nEnable the optional installer profile and rebuild."
+    else
+      echo "Calamares not available. Enable optional installer profile and rebuild."
+    fi
+  fi
+}
+
+open_network() {
+  if command -v nm-connection-editor >/dev/null 2>&1; then
+    nm-connection-editor &
+  elif command -v nmtui >/dev/null 2>&1; then
+    xfce4-terminal -e nmtui &
+  fi
+}
+
+show_info() {
+  local msg="Welcome to Alpha OS!
+
+- Default user: alpha (password: alpha)
+- Use NetworkManager to connect to Wi-Fi/Ethernet.
+- Persistence: add 'persistence' kernel parameter and a USB partition labeled 'persistence' with a persistence.conf containing '/ union'.
+
+You can start the graphical installer if present."
+  if [[ $HAS_ZENITY -eq 1 ]]; then
+    zenity --info --width=480 --title="Alpha OS" --text="$msg"
+  else
+    echo "$msg"
+  fi
+}
+
+if [[ ${1:-} == "--autostart" ]]; then
+  # On autostart, show a quick action dialog
+  if [[ $HAS_ZENITY -eq 1 ]]; then
+    CHOICE=$(zenity --list --width=520 --height=240 --title="Alpha OS Welcome" \
+      --text="Choose an action" --column="Action" --column="Description" \
+      "Install" "Start installer (if available)" \
+      "Network" "Configure network" \
+      "Info" "Show tips" \
+      "Quit" "Close" ) || exit 0
+    case "$CHOICE" in
+      Install) do_install ;;
+      Network) open_network ;;
+      Info) show_info ;;
+      *) ;;
+    esac
+  else
+    show_info
+  fi
+else
+  show_info
+fi

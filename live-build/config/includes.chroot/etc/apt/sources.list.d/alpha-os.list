@@ -1,0 +1,3 @@
+# Alpha OS APT repository (example; disabled by default)
+# Host your repo and sign it, then uncomment:
+# deb [signed-by=/usr/share/keyrings/alpha-os-archive-keyring.gpg] http://repo.alpha-os.example/debian bookworm main
