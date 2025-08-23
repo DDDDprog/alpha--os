@@ -33,7 +33,21 @@ lb clean --purge || true |& tee -a "${LOG_FILE}"
 
 echo "[*] Configuring live-build..." | tee -a "${LOG_FILE}"
 set +e
-lb config |& tee -a "${LOG_FILE}"
+
+lb config noauto \
+  --distribution bookworm \
+  --architectures amd64 \
+  --archive-areas main contrib non-free non-free-firmware \
+  --mirror-bootstrap http://deb.debian.org/debian/ \
+  --mirror-chroot http://deb.debian.org/debian/ \
+  --mirror-chroot-security http://security.debian.org/debian-security \
+  --mirror-binary http://deb.debian.org/debian/ \
+  --binary-images iso-hybrid \
+  --debian-installer none \
+  --apt-recommends false \
+  --bootappend-live "persistence locales=en_US.UTF-8 timezone=UTC keyboard-layouts=us" \
+  --initramfs live-boot |& tee -a "${LOG_FILE}"
+
 CFG_STATUS=${PIPESTATUS[0]}
 set -e
 if [[ ${CFG_STATUS} -ne 0 ]]; then
